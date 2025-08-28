@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import DataTable from "./tableComponents/data-table";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 
 export interface IAdminUsers {
   id: number;
@@ -20,10 +20,10 @@ const ManagementUsers = () => {
   const [limit, setLimit] = useState(50);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const searchParams = useSearchParams();
-  const limitFromQuery = searchParams.get("limit")
-    ? parseInt(searchParams.get("limit")!)
-    : null;
+  // const searchParams = useSearchParams();
+  // const limitFromQuery = searchParams.get("limit")
+  //   ? parseInt(searchParams.get("limit")!)
+  //   : null;
 
   async function fetchData() {
     setIsLoading(true);
@@ -71,7 +71,7 @@ const ManagementUsers = () => {
 
   useEffect(() => {
     fetchData();
-  }, [page, limit, limitFromQuery]);
+  }, [page, limit, isLoading]);
 
   const columnsDef = [
     { header: "ID", accessorKey: "id" },
