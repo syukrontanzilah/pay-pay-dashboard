@@ -21,7 +21,7 @@ const DashboardLayout = ({
       {/* Right content */}
       <div className=" bg-[#f7f8fa] w-[80%] md:w-[92%] lg:w-[84%] overflow-scroll">
         <Navbar />
-        <div className="mt-[80px] ">{children}</div>
+        <div className="mt-[80px] px-5 mb-10">{children}</div>
       </div>
     </div>
   );
