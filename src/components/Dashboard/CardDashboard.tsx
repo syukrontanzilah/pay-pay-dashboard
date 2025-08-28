@@ -15,7 +15,7 @@ const CardDashboard: React.FC<CardDashboardProps> = ({ total, title, bg = "bg-wh
             <h3 className=" text-xs font-semibold">{title}</h3>
         </div>
         <div>
-        <EllipsisVertical fontSize={12} />
+        {/* <EllipsisVertical size={16} /> */}
         </div>
     </div>
   );

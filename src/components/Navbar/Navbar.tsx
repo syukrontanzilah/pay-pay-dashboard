@@ -45,7 +45,7 @@ const Navbar = () => {
       <div className="flex items-center gap-6 justify-end w-full">
         {/* notification */}
         <div className="bg-white rounded-full w-[32px] h-[32px] flex items-center justify-center">
-          <Bell size={18} />
+          <Bell color="#526484"/>
         </div>
 
         {/* dropdown user and menu navbar */}
@@ -56,7 +56,7 @@ const Navbar = () => {
                 {/* dropdown trigger button */}
                 <div className="flex gap-2 items-center">
                   <div className="flex flex-col">
-                    <span className="text-sm leading-3 font-medium">
+                    <span className="text-sm leading-3 font-medium text-gray-700">
                       Ahmad Seggaff
                     </span>
                     <span className="text-[10px] text-gray-500 text-right">
@@ -64,7 +64,7 @@ const Navbar = () => {
                     </span>
                   </div>
                   <div className="bg-white rounded-full w-[32px] h-[32px] flex items-center justify-center">
-                    <CircleUserRound />
+                    <CircleUserRound className="" color="#526484"/>
                     {/* <Image
                     src='/logo.png'
                     alt="user"
