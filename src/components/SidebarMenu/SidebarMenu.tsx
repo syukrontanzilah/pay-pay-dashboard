@@ -56,7 +56,7 @@ const SidebarMenu = () => {
                   {/* submenu */}
                   {menu.submenu && (
                     <div
-                      className={`ml-8 mt-2 transition-all duration-500 ease-in-out overflow-hidden ${
+                      className={`ml-8 mt-0 transition-all duration-500 ease-in-out overflow-hidden ${
                         dropdownOpen === menu.label
                           ? "max-h-screen opacity-100"
                           : "max-h-0 opacity-0"
@@ -72,7 +72,7 @@ const SidebarMenu = () => {
                         return (
                           <Link key={subIndex} passHref href={subitem.href}>
                             <div
-                              className={`flex items-center py-2 px-2 text-gray-500 hover:bg-red-100 rounded-md transition-all duration-300 ${
+                              className={`flex items-center py-2 px-2 mt-1 text-gray-500 hover:bg-red-100 rounded-md transition-all duration-300 ${
                                 isSubItemActive ? "bg-red-100 text-primary" : ""
                               }`}
                             >
