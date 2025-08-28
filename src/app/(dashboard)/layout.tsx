@@ -11,9 +11,9 @@ const DashboardLayout = ({
     <div className="flex">
       {/* Left Menu */}
       <div className="sidebar w-[20%]  md:w-[8%] lg:w-[16%] xl:w-[20%] top-0 sticky overflow-y-auto h-screen bg-white z-20">
-        <Link href={"/"} className="flex p-4">
-          <Image src={"/logo.png"} alt="logo" width={30} height={30} className="transform rotate-40"/>
-          <p className="text-primary ml-2 font-bold text-xl opacity-90">Paypay</p>
+        <Link href={"/"} className="flex p-4 items-center">
+          <Image src={"/logo2.png"} alt="logo" width={30} height={30} className="transform rotate-0"/>
+          <p className="text-primary ml-1 font-bold text-xl opacity-90">Paypay</p>
         </Link>
         <SidebarMenu/>
       </div>

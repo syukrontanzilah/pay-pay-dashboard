@@ -2,18 +2,9 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import DataTable from "./tableComponents/data-table";
+import { IAdminUsers } from "@/types/userType";
 // import { useSearchParams } from "next/navigation";
 
-export interface IAdminUsers {
-  id: number;
-  name: string;
-  phone: string;
-  email: string;
-  roles: string;
-  activated: number;
-  created_at: string;
-  updated_at: string;
-}
 
 const ManagementUsers = () => {
   const [data, setData] = useState<IAdminUsers[]>([]);

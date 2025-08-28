@@ -11,6 +11,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { DataTableToolbar } from "../components/dataTableToolbar";
+// import DataTableToolbar from "../components/dataTableToolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -54,7 +56,9 @@ export default function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="my-4">Data Table Toolbar</div>
+      <div className="my-4">
+        <DataTableToolbar table={table} fetchData={fetchData}/>
+      </div>
 
       {/* Tabel */}
       <div className="rounded-md border pb-4">
