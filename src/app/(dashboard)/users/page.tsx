@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import React from "react";
 import DataTable from "./tableComponents/data-table";
 import { IAdminUsers } from "@/types/userType";
+import { usersDummy } from "@/lib/usersDummy";
+import { columns } from "./tableComponents/column";
 // import { useSearchParams } from "next/navigation";
 
 
@@ -19,40 +21,7 @@ const ManagementUsers = () => {
   async function fetchData() {
     setIsLoading(true);
     try {
-      const dummyData: IAdminUsers[] = [
-        {
-          id: 1,
-          name: "John Doe",
-          phone: "08123456789",
-          email: "john@example.com",
-          roles: "Admin",
-          activated: 1,
-          created_at: "2024-01-01",
-          updated_at: "2024-06-01",
-        },
-        {
-          id: 2,
-          name: "Jane Smith",
-          phone: "08198765432",
-          email: "jane@example.com",
-          roles: "User",
-          activated: 1,
-          created_at: "2024-02-15",
-          updated_at: "2024-06-10",
-        },
-        {
-          id: 3,
-          name: "Budi Santoso",
-          phone: "082233445566",
-          email: "budi@example.com",
-          roles: "Moderator",
-          activated: 0,
-          created_at: "2024-03-10",
-          updated_at: "2024-06-15",
-        },
-      ];
-
-      setData(dummyData);
+      setData(usersDummy);
     } catch (error) {
       console.error("Error fetching data user:", error);
     } finally {
@@ -62,18 +31,21 @@ const ManagementUsers = () => {
 
   useEffect(() => {
     fetchData();
-  }, [page, limit, isLoading]);
+  }, [page, limit]);
 
-  const columnsDef = [
-    { header: "ID", accessorKey: "id" },
-    { header: "Name", accessorKey: "name" },
-    { header: "Phone", accessorKey: "phone" },
-    { header: "Email", accessorKey: "email" },
-    { header: "Role", accessorKey: "roles" },
-    { header: "Activated", accessorKey: "activated" },
-    { header: "Created At", accessorKey: "created_at" },
-    { header: "Updated At", accessorKey: "updated_at" },
-  ];
+  // const columnsDef = [
+  //   { header: "ID", accessorKey: "id" },
+  //   { header: "Name", accessorKey: "name" },
+  //   { header: "Phone", accessorKey: "phone" },
+  //   { header: "Email", accessorKey: "email" },
+  //   { header: "Role", accessorKey: "roles" },
+  //   { header: "Activated", accessorKey: "activated" },
+  //   { header: "Created At", accessorKey: "created_at" },
+  //   { header: "Updated At", accessorKey: "updated_at" },
+  // ];
+
+    const columnsDef = columns(fetchData);
+
 
   return (
     <div className="mx-auto">

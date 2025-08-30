@@ -90,7 +90,7 @@ const Navbar = () => {
                   <MenuItem>
                     <button
                       onClick={() => router.push("/profile")}
-                      className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:text-primary transition-all duration-500 flex gap-2 items-center"
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-primary transition-all duration-500 flex gap-2 items-center"
                     >
                       <CircleUserRound size={16}  />
                       Profile
@@ -99,7 +99,7 @@ const Navbar = () => {
                   </MenuItem>
                   <MenuItem>
                     <button
-                      className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:text-primary hover:bg-primaryLight transition-all duration-500 flex gap-2 items-center rounded-md"
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-primary hover:bg-primaryLight transition-all duration-500 flex gap-2 items-center rounded-md"
                       onClick={() => {
                         // logout();
                         router.replace("/login");

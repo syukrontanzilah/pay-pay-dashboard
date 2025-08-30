@@ -2,7 +2,6 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Table } from "@tanstack/react-table";
 import { Input } from "@/components/ui/input";
-// import { DataTableViewOptions } from "./data-table-view-options";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -13,6 +12,7 @@ import {
 import { Funnel, Plus, RotateCcw, Sheet } from "lucide-react";
 import { CSVLink } from "react-csv";
 import { Data } from "react-csv/lib/core";
+import { DataTableViewOptions } from "./dataTableViewOptions";
 // import AddUpdateRoleModal from "./AddUpdateRoleModal";
 
 interface DataTableToolbarProps<TData> {
@@ -152,7 +152,7 @@ export function DataTableToolbar<TData>({
             CSV
           </Button>
         </CSVLink>
-        {/* <DataTableViewOptions table={table} /> */}
+        <DataTableViewOptions table={table} />
       </div>
       {/* {isModalOpen && (
         <AddUpdateRoleModal

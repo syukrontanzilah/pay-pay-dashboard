@@ -12,6 +12,7 @@ import {
 } from "@tanstack/react-table";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DataTableToolbar } from "../components/dataTableToolbar";
+import DataTablePagination from "@/components/Table/pagination";
 // import DataTableToolbar from "../components/dataTableToolbar";
 
 interface DataTableProps<TData, TValue> {
@@ -115,6 +116,13 @@ export default function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
+        <div className="h-4" />
+        <DataTablePagination
+          table={table}
+          // setPage={setPage}
+          // setLimit={setLimit}
+          // limit={limit}
+        />
       </div>
     </div>
   );
