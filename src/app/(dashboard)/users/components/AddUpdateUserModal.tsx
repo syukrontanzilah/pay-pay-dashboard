@@ -1,153 +1,126 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-// import FormInput from "@/components/input/FormInput";
-// import FormModal from "@/components/modal/FormModal";
-// import {
-//   ToastClose,
-//   ToastError,
-//   ToastLoading,
-//   ToastSuccess,
-// } from "@/components/toast/Toast";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import FormModal from "@/components/Modal/FormModal";
 import FormInput from "@/components/Input/FormInput";
 import Select from "@/components/Select/Select";
-import { ToastClose, ToastLoading, ToastSuccess } from "@/components/Toast/Toast";
-// import Select from "@/components/select/Select";
-// import { getRoles, RoleData } from "@/utils/roleUtils";
-// import {
-//   getAdminUserByID,
-//   postAdminUsers,
-//   updateAdminUsers,
-// } from "@/utils/userUtils";
+import {
+  ToastClose,
+  ToastLoading,
+  ToastSuccess,
+} from "@/components/Toast/Toast";
+import { usersDummy } from "@/lib/usersDummy";
+import { IAdminUsers } from "@/types/userType";
 
-interface Roles {
-  id: number;
-  name: string;
-  guard_name: string;
-  created_at: string;
-  updated_at: string;
-}
-
-interface UserData {
-  id: number;
-  name: string;
-  phone: string;
-  email: string;
-  activated: number;
-  google_id: string | null;
-  roles: Roles;
-  created_at: string;
-  updated_at: string;
-}
-
-interface RoleData {
-  id: number;
-  name: string;
-  guard_name: string;
-  created_at: string;
-  updated_at: string;
-}
-
-interface AddUpdateRoleProps {
+interface AddUpdateUserProps {
   isOpen: boolean;
   onClose: () => void;
-  role?: any;
+  role?: IAdminUsers;
   fetchData: () => Promise<void>;
 }
 
-const AddUpdateUserModal: React.FC<AddUpdateRoleProps> = ({
+const dummyRoles: string[] = ["Admin", "User", "Moderator"];
+
+// Simulasi API
+async function getAdminUserByID(id: number): Promise<IAdminUsers | undefined> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(usersDummy.find((u) => u.id === id));
+    }, 500);
+  });
+}
+
+async function postAdminUsers(data: IAdminUsers) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("POST USER:", data);
+      resolve({ status: true, data });
+    }, 1000);
+  });
+}
+
+async function updateAdminUsers(id: number, data: IAdminUsers) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("UPDATE USER ID:", id, "DATA:", data);
+      resolve({ status: true, data });
+    }, 1000);
+  });
+}
+
+const AddUpdateUserModal: React.FC<AddUpdateUserProps> = ({
   isOpen,
   onClose,
   role,
   fetchData,
 }) => {
-  const [dataRole, setDataRole] = useState<RoleData[]>([]);
-  const [dataFilterRole, setDataFilterRole] = useState<RoleData[]>([]);
-
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const [userData, setUserData] = useState<UserData | undefined>(undefined);
-
-  const getDataUserById = async (id: string) => {
-    try {
-    //   const res = await getAdminUserByID(id);
-    //   console.log("response by id:", res.data);
-    //   setUserData(res?.data);
-    } catch (error) {}
-  };
-
-//   useEffect(() => {
-//     getDataUserById(role?.id);
-//   }, [role?.id]);
+  const [userData, setUserData] = useState<IAdminUsers | undefined>(undefined);
 
   const [formData, setFormData] = useState({
-    roles: userData?.roles?.id || "",
-    email: userData?.email || "",
-    name: userData?.name || "",
+    roles: "",
+    email: "",
+    name: "",
     password: "",
-    phone: userData?.phone || "",
+    phone: "",
   });
 
+  // Ambil data user by ID kalau ada role.id (mode edit)
+  const getDataUserById = async (id: number) => {
+    try {
+      const res = await getAdminUserByID(id);
+      setUserData(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Kalau modal dibuka buat edit
   useEffect(() => {
-    if (role) {
+    if (role?.id) {
+      getDataUserById(role.id);
+    }
+  }, [role?.id]);
+
+  // Sync data user ke form
+  useEffect(() => {
+    if (role && userData) {
       setFormData({
-        roles: userData?.roles?.id || "",
-        email: userData?.email || "",
-        name: userData?.name || "",
+        roles: userData.roles || "",
+        email: userData.email || "",
+        name: userData.name || "",
         password: "",
-        phone: userData?.phone || "",
+        phone: userData.phone || "",
+      });
+    } else {
+      setFormData({
+        roles: "",
+        email: "",
+        name: "",
+        password: "",
+        phone: "",
       });
     }
-  }, [
-    role,
-    userData?.id,
-    userData?.email,
-    userData?.name,
-    userData?.phone,
-    userData?.roles?.id,
-  ]);
-
-  async function fetchDataRole() {
-    try {
-    //   const res = await getRoles();
-      // console.log("response role", res.data);
-    //   setDataRole(res?.data);
-    //   const filteredRoles = res?.data.filter(
-    //     (role: RoleData) => role.name !== "Superadmin"
-    //   );
-    //   setDataFilterRole(filteredRoles);
-    } catch (error) {
-      console.log("error", error);
-    }
-  }
-
-  useEffect(() => {
-    fetchDataRole();
-  }, []);
+  }, [role, userData]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
 
-    // maybe this will fix, autocomplete
-    if (name == "userEmail") {
-      setFormData((prevState) => ({
-        ...prevState,
-        email: value,
-      }));
+    if (name === "userEmail") {
+      setFormData((prevState) => ({ ...prevState, email: value }));
+      return;
     }
-    if (name == "userPassword") {
-      setFormData((prevState) => ({
-        ...prevState,
-        password: value,
-      }));
+    if (name === "userPassword") {
+      setFormData((prevState) => ({ ...prevState, password: value }));
+      return;
     }
+
     setFormData((prevState) => ({
       ...prevState,
-      [name]: name === "roles" ? Number(value) : value,
+      [name]: value,
     }));
   };
 
@@ -155,26 +128,20 @@ const AddUpdateUserModal: React.FC<AddUpdateRoleProps> = ({
     e.preventDefault();
     setIsSubmitting(true);
     const toastId = ToastLoading();
-    console.log("form data", formData);
     try {
-    //   const res = role
-    //     ? await updateAdminUsers(role.id, formData)
-    //     : await postAdminUsers(formData);
+      const res = role
+        ? await updateAdminUsers(role.id, formData as any)
+        : await postAdminUsers(formData as any);
 
       ToastClose(toastId);
-    //   console.log("response submit-->", res);
-    //   if (res.status) {
+
+      if ((res as any).status) {
         ToastSuccess({
           title: `Berhasil submit data!`,
         });
-    //     await fetchData();
-    //     onClose();
-    //   }
-    //   if (res.error) {
-    //     ToastError({
-    //       title: `${res.stat_msg}`,
-    //     });
-    //   }
+        await fetchData();
+        onClose();
+      }
     } catch (error) {
       console.error("Error update role:", error);
     } finally {
@@ -187,7 +154,6 @@ const AddUpdateUserModal: React.FC<AddUpdateRoleProps> = ({
       <div>
         <div className="p-5 border-b border-gray-200">
           <h2 className="text-lg font-semibold text-gray-600">
-            {" "}
             {role ? "Edit User" : "Add User"}
           </h2>
         </div>
@@ -200,16 +166,16 @@ const AddUpdateUserModal: React.FC<AddUpdateRoleProps> = ({
               onChange={handleInputChange}
               required
               optionsName="Pilih Role.."
-              options={dataRole?.map((role) => ({
-                value: role.id.toString(),
-                label: role.name,
+              options={dummyRoles.map((role) => ({
+                value: role,
+                label: role,
               }))}
             />
           </div>
           <FormInput
             label="Email"
             name="userEmail"
-            type="userEmail"
+            type="email"
             value={formData.email}
             onChange={handleInputChange}
             placeholder="Ex: bilpay@gmail.com"
@@ -233,21 +199,20 @@ const AddUpdateUserModal: React.FC<AddUpdateRoleProps> = ({
             value={formData.phone}
             onChange={handleInputChange}
             placeholder="Masukkan No Phone"
-            // required
             autoComplete="off"
           />
           <FormInput
-            label={`${
+            label={
               role
                 ? "Masukkan password baru (Jika ingin mengubah Password)"
                 : "Password"
-            }`}
+            }
             name="userPassword"
-            type="userPassword"
+            type="password"
             value={formData.password}
             onChange={handleInputChange}
             placeholder="Masukkan Password"
-            required={role ? false : true}
+            required={!role}
             autoComplete="off"
             isInputPassword
           />
