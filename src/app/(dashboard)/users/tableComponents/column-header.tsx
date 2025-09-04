@@ -40,7 +40,7 @@ import {
               size="sm"
               className="-ml-3 h-8 data-[state=open]:bg-accent"
             >
-              <span className="text-xs font-bold">{title}</span>
+              <span className="text-sm font-bold">{title}</span>
               {column.getIsSorted() === "desc" ? (
                 <ArrowDownIcon className="ml-2 h-4 w-4" />
               ) : column.getIsSorted() === "asc" ? (
@@ -51,16 +51,16 @@ import {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">
-            <DropdownMenuItem className="text-gray-500 text-xs" onClick={() => column.toggleSorting(false)}>
+            <DropdownMenuItem className="text-gray-500 text-sm" onClick={() => column.toggleSorting(false)}>
               <ArrowUpIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
               Asc
             </DropdownMenuItem>
-            <DropdownMenuItem className="text-gray-500 text-xs" onClick={() => column.toggleSorting(true)}>
+            <DropdownMenuItem className="text-gray-500 text-sm" onClick={() => column.toggleSorting(true)}>
               <ArrowDownIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
               Desc
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-gray-500 text-xs" onClick={() => column.toggleVisibility(false)}>
+            <DropdownMenuItem className="text-gray-500 text-sm" onClick={() => column.toggleVisibility(false)}>
               <EyeNoneIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
               Hide
             </DropdownMenuItem>

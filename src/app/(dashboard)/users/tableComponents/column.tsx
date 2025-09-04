@@ -52,7 +52,7 @@ export const columns = (
       <DataTableColumnHeader column={column} title="Name" />
     ),
   },
-    {
+  {
     accessorKey: "phone",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Phone" />
@@ -70,12 +70,13 @@ export const columns = (
   },
   {
     id: "actions",
+    header: () => <div>Actions</div>,
     cell: ({ row }) => {
-        const user = row.original;
-        return <UserAction role={user} fetchData={fetchData} />;
+      const user = row.original;
+      return <UserAction role={user} fetchData={fetchData} />;
     },
   },
-    // {
+  // {
   //   accessorKey: "created_at",
   //   header: ({ column }) => (
   //     <DataTableColumnHeader column={column} title="Created At" />

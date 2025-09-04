@@ -13,7 +13,8 @@ import { MoreHorizontal } from "lucide-react";
 import { FaRegCopy, FaRegTrashAlt } from "react-icons/fa";
 import { MdEdit, MdOutlineRemoveRedEye } from "react-icons/md";
 import { IAdminUsers } from '@/types/userType';
-// import AddUpdateRoleModal from './AddUpdateRoleModal';
+import AddUpdateUserModal from './AddUpdateUserModal';
+import DeleteConfirmationModal from '@/components/Modal/DeleteConfirmationModal';
 // import { deleteAdminUsers, IAdminUsers } from '@/utils/userUtils';
 // import { ToastPromiseDelete } from '@/components/toast/Toast';
 // import DeleteConfirmationModal from '@/components/modal/DeleteConfirmationModal';
@@ -70,25 +71,25 @@ const UserAction: React.FC<RoleProps> = ({role, fetchData}) => {
               <FaRegTrashAlt className="mr-1" /> Delete
             </DropdownMenuItem>
           </DropdownMenuContent>
-          {/* <DeleteConfirmationModal
+          <DeleteConfirmationModal
             isOpen={isModalDeleteOpen}
             onClose={() => setIsModaDeletelOpen(false)}
             onConfirm={() => {
               handleDelete(role.id)
               setIsModaDeletelOpen(false); 
             }}
-          /> */}
+          />
         </DropdownMenu>
-        {/* {
+        {
             isModalOpen && (
-                <AddUpdateRoleModal
+                <AddUpdateUserModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 role={role}
                 fetchData={fetchData}
                 />
             )
-        } */}
+        }
     </>
   )
 }

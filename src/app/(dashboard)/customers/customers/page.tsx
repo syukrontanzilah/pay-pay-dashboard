@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import "./customers.scss";
 
 const Customers = () => {
   return (
-    <div>Customers page</div>
-  )
-}
+    <>
+      <div className="contoh">Customers page test</div>
+      <div className="text">test huruf</div>
+    </>
+  );
+};
 
-export default Customers
+export default Customers;

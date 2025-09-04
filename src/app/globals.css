@@ -120,3 +120,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* .contoh {
+  @apply text-2xl text-red-500;
+} */

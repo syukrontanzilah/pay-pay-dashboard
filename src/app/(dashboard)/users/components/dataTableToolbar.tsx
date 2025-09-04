@@ -13,6 +13,7 @@ import { Funnel, Plus, RotateCcw, Sheet } from "lucide-react";
 import { CSVLink } from "react-csv";
 import { Data } from "react-csv/lib/core";
 import { DataTableViewOptions } from "./dataTableViewOptions";
+import AddUpdateUserModal from "./AddUpdateUserModal";
 // import AddUpdateRoleModal from "./AddUpdateRoleModal";
 
 interface DataTableToolbarProps<TData> {
@@ -154,13 +155,13 @@ export function DataTableToolbar<TData>({
         </CSVLink>
         <DataTableViewOptions table={table} />
       </div>
-      {/* {isModalOpen && (
-        <AddUpdateRoleModal
+      {isModalOpen && (
+        <AddUpdateUserModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           fetchData={fetchData}
         />
-      )} */}
+      )}
     </div>
   );
 }

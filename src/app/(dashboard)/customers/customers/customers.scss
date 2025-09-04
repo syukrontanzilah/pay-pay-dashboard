@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+$red: rgb(230, 192, 192);
+$blue: rgb(117, 117, 232);
+$green: rgb(79, 178, 79);
+$yellow: rgb(139, 139, 46);
+$orange: rgb(94, 74, 35);
+
+@mixin textCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%card {
+  border: 1px solid black;
+  width: 200px;
+  height: 100px;
+  border-radius: 20px;
+}
+
+.contoh {
+  @include textCenter;
+  @extend %card;
+  background-color: $red;
+}
+
+.huruf {
+    @apply text-2xl color: $green;
+    
+}
+
+
+// nesting
+// mixins
+// estend
+// variable
